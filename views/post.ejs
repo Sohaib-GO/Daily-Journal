@@ -6,14 +6,61 @@
     <h1> <%= title %> </h1>
     <p> <%= content %> </p>    
 
+<!-- Buttons -->
+<div class="btn-group myButtons">
+    <!-- Delete the post  -->
 
     <form action="/delete" method="post">
-        <button type="submit" class="delete-button" name="deletedPost" value="<%= post._id %>" onChange="this.form.submit()">
-          DELETE</button>
+        <button type="submit" class="delete-button btn btn-danger" name="deletedPost" value="<%= post._id %>" onChange="this.form.submit()">
+          Delete</button>
       </form>
             
-          
-       
+   <!-- Update the Post  -->
+ <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Edit post</button>
+
+</div>
+
+
+
+<!-- Modal  -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Make changes!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+             <!-- Update the Post  -->
+          <form action="/update" method="post">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <!-- New Title Name  -->
+              <input  class="form-control" type="text" name="newTitle">
+            </div>
+            <div class="mb-3">
+                <!-- New Content  -->
+                <label for="recipient-name" class="col-form-label">Content</label>
+
+                <textarea class="form-control" name="newContent" id="" cols="80" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- Submit changes -->
+          <button type="submit" class="btn btn-primary"  name="updatePost" value="<%= post._id %>" > Make Changes
+        </button>
+    </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
   
  
   

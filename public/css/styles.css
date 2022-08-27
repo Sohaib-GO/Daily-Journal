@@ -1,19 +1,48 @@
+
+/* fixes issue with overlapping posts and footer */
+html{
+    position: relative;
+    min-height: 100%;
+}
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
+    
 }
 .navbar {
-    padding-top: 15px;
+    padding-top: 55px;
     padding-bottom: 15px;
     border: 0;
     border-radius: 0;
     margin-bottom: 0;
-    font-size: 12px;
     letter-spacing: 5px;
+    display: block;
+}
+
+
+.navbar-nav  li {
+    padding: 2rem 1rem !important;
+    font-size: 15px !important;
+
+}
+
+
+.navbar-nav  li:hover {
+    background-color: #e5e5e5 !important;
+    border-radius: 19px;
 }
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
+
 }
+.myButtons{
+    padding: 2rem 0 2rem 59rem !important;
+
+  }
+
+
+
+
 
 .footer-padding {
 	padding-bottom: 60px;
@@ -30,11 +59,11 @@
 
 .footer p {
 	margin-top: 25px;
+
 	font-size: 12px;
   color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -webkit-box-shadow: -1px 69px 300px 25px rgba(0,0,0,0.75);
+
 }
-/* fixes issue with overlapping posts and footer */
-html{
-    position: relative;
-    min-height: 100%;
-}
+
