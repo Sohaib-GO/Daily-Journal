@@ -1,0 +1,20 @@
+<%- include("partials/header.ejs") -%>
+
+
+
+
+    <h1> <%= title %> </h1>
+    <p> <%= content %> </p>    
+
+
+    <form action="/delete" method="post">
+        <button type="submit" class="delete-button" name="deletedPost" value="<%= post._id %>" onChange="this.form.submit()">
+          DELETE</button>
+      </form>
+            
+          
+       
+  
+ 
+  
+<%- include("partials/footer.ejs") -%>
