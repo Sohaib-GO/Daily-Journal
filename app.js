@@ -1,5 +1,6 @@
 //jshint esversion:6
-
+// Dot ENV : to keep keys and apis secure 
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -21,7 +22,7 @@ app.use(express.static("public"));
 // use express-session for cookies
 app.use(
   session({
-    secret: "little secret",
+    secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: false,
   })
