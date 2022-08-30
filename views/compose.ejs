@@ -1,5 +1,9 @@
 <%- include("partials/header.ejs") -%>
 
+<form action="/logout" method="post">
+<button class="loginbutton" type="submit">Log Out</button>
+</form>
+
 <h1>Compose</h1>
 <div class="form-group">  <form action="/compose" method="post">
     <div> <label for="">Title</label> </div> 

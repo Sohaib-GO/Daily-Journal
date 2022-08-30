@@ -10,20 +10,33 @@ html{
     
 }
 .navbar {
-    padding-top: 55px;
+    padding-top: 44px !important;
     padding-bottom: 15px;
     border: 0;
     border-radius: 0;
     margin-bottom: 0;
     letter-spacing: 5px;
-    display: block;
+
 }
 
-
-.navbar-nav  li {
-    padding: 2rem 1rem !important;
+.loginbutton{
+    padding: 0 10px;
+    border-width: 2px;
+    border-style: solid;
+    text-transform: uppercase;
+    border-radius: 7px;
+    background-color: #1abc9c;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    border-color: #91c60f;
+    margin-left: 60rem;
+    
+}
+.navbar-nav  li a{
+    padding: 1rem 1rem !important;
     font-size: 15px !important;
-
+    text-decoration: none !important;
 }
 
 
@@ -41,9 +54,7 @@ html{
   }
 
 
-
-
-
+  /* footer */
 .footer-padding {
 	padding-bottom: 60px;
 }
