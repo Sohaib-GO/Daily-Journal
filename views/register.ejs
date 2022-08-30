@@ -18,6 +18,7 @@
             <h3 class="login-text"><i class="bi bi-person-plus-fill loginLogo"></i> Sign Up</h3>
         
             <form  action="/register" method="post">
+                <div class="item"></i><input class="input" type="text" name="name" placeholder="Name"></div> 
                 <div class="item"></i><input class="input" type="text" name="username" placeholder="e-mail"></div> 
                 <div class="item"><input class="input" type="password" name="password" placeholder="Password"> </div>
 
@@ -27,9 +28,11 @@
          
             <div class="social-media">
 
-                <a href="#"><div class="icons8-google social-mediaImg"></div></a> 
-                <a href="#"><div class="icons8-facebook-circled social-mediaImg"></div></a> 
                 <a href="#"><div class="icons8-twitter social-mediaImg"></div></a> 
+                                  <!-- Facebook Auth -->
+                <a href="/auth/facebook"><div class="icons8-facebook-circled social-mediaImg"></div></a> 
+                                  <!-- Google Auth -->
+                <a href="/auth/google"><div class="icons8-google social-mediaImg"></div></a> 
   
             </div>
             <span class="ac">Have an Account? <a href="/login">Sign in</a></span>

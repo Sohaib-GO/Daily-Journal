@@ -16,7 +16,7 @@
         <div class="container-wrapper">
 
             <h3 class="login-text"><i class="bi bi-person-circle ac-logo loginLogo"></i> Login</h3>
-        
+        <!-- Login form  -->
             <form action="/login" method="post" >
                 <div class="item"></i><input class="input" type="text" name="username" placeholder="Username"></div> 
                 <div class="item"><input class="input" type="password" name="password" placeholder="Password"> </div>
@@ -27,10 +27,13 @@
             <h2><span>OR</span></h2>
          
             <div class="social-media">
-
-                <a href="#"><div class="icons8-google social-mediaImg"></div></a> 
-                <a href="#"><div class="icons8-facebook-circled social-mediaImg"></div></a> 
                 <a href="#"><div class="icons8-twitter social-mediaImg"></div></a> 
+                                  <!-- Facebook Auth -->
+                <a href="/auth/facebook"><div class="icons8-facebook-circled social-mediaImg"></div></a> 
+                                  <!-- Google Auth -->
+
+                <a href="/auth/google"><div class="icons8-google social-mediaImg"></div></a> 
+
   
             </div>
             <span class="ac">Don't have an Account? <a href="/register">Sign Up</a></span>

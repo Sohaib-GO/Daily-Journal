@@ -11,6 +11,13 @@ const app = express();
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+const FacebookStrategy = require('passport-facebook');
+
+// plugin for Mongoose which adds a findOrCreate method to models
+const findOrCreate = require('mongoose-findorcreate')
+
+
 
 app.set("view engine", "ejs");
 
@@ -28,7 +35,7 @@ app.use(
   })
 );
 
-// use passport
+// use passport-local-mongoose
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -51,21 +58,38 @@ const postSchema = {
 // Users Schema: for login and authentication
 
 const userSchema = new mongoose.Schema({
+  name: String,
   email: String,
   password: String,
+  googleId: String,
+  facebookId: String,
+  post: String
+
 });
 
 // Secures saved data to Mongoose
 userSchema.plugin(passportLocalMongoose);
+// Google to Mongoose
+userSchema.plugin(findOrCreate);
+
 
 const User = new mongoose.model("User", userSchema);
 
 // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
 passport.use(User.createStrategy());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, username: user.username, name: user.name });
+  });
+});
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
 
+// Mongoose Model 
 const Post = mongoose.model("Post", postSchema);
 
 // Root Route
@@ -77,10 +101,12 @@ app.get("/", (req, res) => {
     });
   });
 });
-
+// About page Route 
 app.get("/about", (req, res) => {
   res.render("about", { aboutPage: aboutContent });
 });
+
+// Contact  page Route 
 app.get("/contact", (req, res) => {
   res.render("contact", { contactInfo: contactContent });
 });
@@ -99,17 +125,9 @@ app.get("/posts/:postId", (req, res) => {
   });
 });
 
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
 
 // New blog route
-app
-  .route("/compose")
+app.route("/compose")
   .get((req, res) => {
     // Check if user is authenticated to publish new posts
 
@@ -119,7 +137,6 @@ app
       res.redirect("/login");
     }
   })
-
   .post((req, res) => {
     const post = new Post({
       title: req.body.newPost,
@@ -133,6 +150,7 @@ app
     });
   });
 
+
 // Delete post route
 app.post("/delete", (req, res) => {
   const deletedPost = req.body.deletedPost;
@@ -145,7 +163,7 @@ app.post("/delete", (req, res) => {
       }
     });
   } else {
-    res.redirect("/posts/" + deletedPost);
+    res.redirect("/login");
   }
 });
 
@@ -167,11 +185,22 @@ app.post("/update", (req, res) => {
       }
     );
   } else {
-    res.redirect("/posts/" + updateId);
+    res.redirect("/login");
   }
 });
 
 // Login & Authentication
+// Register Route 
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// Login Route 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+
 app.post("/register", (req, res) => {
   User.register(
     { username: req.body.username },
@@ -189,14 +218,66 @@ app.post("/register", (req, res) => {
   );
 });
 
-app.post(
-  "/login",
+// Authenticates users to login
+app.post("/login",
   passport.authenticate("local", {
     successRedirect: "/compose",
     failureRedirect: "/login",
   })
 );
 
+
+// Use Google to register or login 
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/google/compose"},
+  function(accessToken, refreshToken, profile, cb){
+    User.findOrCreate({googleId:profile.id},function (err,user){
+      return cb(err, user);
+    });
+  }
+));
+
+// Authenticate Google Signing with PassportJS
+app.get("/auth/google",
+  passport.authenticate("google", { scope:
+      [ "email", "profile" ] }
+));
+
+// Rendering page after Signing with Google 
+app.get("/auth/google/compose", passport.authenticate('google', {
+  successRedirect: "/compose",
+  failureRedirect: "/login"
+}));
+
+// Use Facebook to register or login 
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: "http://localhost:3000/auth/facebook/compose"
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+// Authenticate Facebook Signing with PassportJS
+app.get("/auth/facebook",
+passport.authenticate("facebook")
+);
+
+// Rendering page after Signing with Facebook 
+app.get("/auth/facebook/compose", passport.authenticate('facebook', {
+  successRedirect: "/compose",
+  failureRedirect: "/login"
+}));
+
+
+// Logout route 
 app.post("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
@@ -205,6 +286,7 @@ app.post("/logout", function (req, res, next) {
     res.redirect("/");
   });
 });
+
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
