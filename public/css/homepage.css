@@ -10,7 +10,12 @@ background-size: 100%;
 .content{
     margin-left: 300px;
     text-align:center;
-    position: relative; 
+    position: relative;   
+  }
+
+  .content h1 {
+    animation: effect 4s linear infinite; 
+
   }
 .menu-container{
     display:inline-block;
@@ -50,4 +55,15 @@ top: 0;
     color: #fff;
   }
 
+  
+  /* Effect for H1  */
+  @keyframes effect { 
+    0% { 
+      color: rgba(246, 211, 211, 0.933);
+    } 
+    100% { 
+      color: rgb(56, 12, 12); 
+      -webkit-background-clip: text; 
+    } 
+  } 
   
