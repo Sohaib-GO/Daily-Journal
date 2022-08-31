@@ -10,7 +10,7 @@
 }
 
 html {
-    background-color: #1abc9c;
+    background-color: #EEEEEE;
 }
 
 .container-wrapper {
@@ -18,7 +18,7 @@ html {
     margin: 2em;
     width: max-content;
     height: max-content;
-    background-color: #70efd6;
+    background-color: #cca8a8;
     border-radius: 30px;
 }
 

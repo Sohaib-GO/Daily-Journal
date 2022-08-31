@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Sans+Pro:wght@200&display=swap');
 /* fixes issue with overlapping posts and footer */
 html{
     position: relative;
@@ -18,27 +19,32 @@ html{
     letter-spacing: 5px;
 
 }
-
+.navbar-header a{
+    text-decoration: none !important;
+}
 .loginbutton{
     padding: 0 10px;
     border-width: 2px;
     border-style: solid;
     text-transform: uppercase;
     border-radius: 7px;
-    background-color: #1abc9c;
+    background-color: #6c6868;
     cursor: pointer;
     text-decoration: none;
     color: #fff;
-    border-color: #91c60f;
+    border-color: #000000;
     margin-left: 60rem;
     
+}
+.loginbutton:hover{
+    background-color: rgb(160, 12, 12);
 }
 .navbar-nav  li a{
     padding: 1rem 1rem !important;
     font-size: 15px !important;
     text-decoration: none !important;
     font-weight: 600 !important;
-    color: rgba(113, 163, 3, 0.877) !important;
+    color: black !important;
 }
 
 
@@ -47,14 +53,29 @@ html{
     border-radius: 19px;
 }
 .navbar-nav  li a:hover {
-    color: #1abc9c !important;
+    color: rgba(135, 127, 127, 0.933) !important;
 
 }
 .myButtons{
     padding: 2rem 0 2rem 59rem !important;
 
   }
+.submitButton{
+    margin-top: 1rem !important;
+}
+h1{
+  font-family: 'Lobster', cursive;
+  margin-top: 9%;
+}
 
+p{
+        line-height: 1.4;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size:18px;
+        white-space: pre-wrap;
+      
+      }
+      
 
   /* footer */
 .footer-padding {
@@ -67,16 +88,23 @@ html{
 	bottom: 0;
 	width: 100%;
 	height: 60px;
-	background-color: #1abc9c;
+	background-color: rgba(204, 192, 192, 0.933);
+    padding-bottom: 7rem;
 }
 
 .footer p {
 	margin-top: 25px;
 
-	font-size: 12px;
+	font-size: 19px;
   color: #fff;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  -webkit-box-shadow: -1px 69px 300px 25px rgba(0,0,0,0.75);
-
 }
 
+/* Socials in Footer  */
+.footer a {
+    padding: 0 0.8rem;
+   color: #115487;
+    font-size: 1.5rem;
+  }
+ .footer a:hover {
+color: #000000;  }
+  

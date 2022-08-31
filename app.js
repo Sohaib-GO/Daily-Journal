@@ -40,8 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Default texts
-const homeStartingContent =
-  " Vestibulum vestibulum rhoncus est pellentesque platea dictumst vestibulum rhoncus est pellentesque rhoncus est habitasse platea dictumst vestibulum pellentesque. Dictumst vestibulum rhoncus habitasse platea dictumst vestibulum ";
+const homeStartingContent = "This is a simple blogging web application. Click on the 'PUBLISH' to create a new post with a title and a body. After you're done composing, Submit the post and you'll be redirected to the home page where a part of it will be displayed. Click on the 'Read More' link beside each post you create, and you'll navigate to the respective post's page with the full post body text shown. While there, click on 'Delete Post' to delete the post and you'll navigate to the home page after the respective post is deleted. You could also click on'Edit post' to make changes to the post and you will be redirected to the same page. ";
 const aboutContent =
   " Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const contactContent =
@@ -94,13 +93,22 @@ const Post = mongoose.model("Post", postSchema);
 
 // Root Route
 app.get("/", (req, res) => {
+   res.render("homepage");
+});
+
+// homepage route
+app.get("/homepage", (req, res) => {
+  res.render("homepage");
+});
+
+app.get("/home", (req,res)=> {
   Post.find({}, (err, posts) => {
     res.render("home", {
       StartingContent: homeStartingContent,
       posts: posts,
     });
   });
-});
+})
 // About page Route 
 app.get("/about", (req, res) => {
   res.render("about", { aboutPage: aboutContent });
@@ -145,10 +153,11 @@ app.route("/compose")
 
     post.save((err) => {
       if (!err) {
-        res.redirect("/");
+        res.redirect("/home");
       }
     });
   });
+
 
 
 // Delete post route
@@ -159,7 +168,7 @@ app.post("/delete", (req, res) => {
   if (req.isAuthenticated()) {
     Post.deleteOne({ _id: deletedPost }, (err) => {
       if (!err) {
-        res.redirect("/");
+        res.redirect("/home");
       }
     });
   } else {
@@ -211,7 +220,7 @@ app.post("/register", (req, res) => {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          res.redirect("/");
+          res.redirect("/home");
         });
       }
     }
@@ -221,7 +230,7 @@ app.post("/register", (req, res) => {
 // Authenticates users to login
 app.post("/login",
   passport.authenticate("local", {
-    successRedirect: "/compose",
+    successRedirect: "/home",
     failureRedirect: "/login",
   })
 );
@@ -247,7 +256,7 @@ app.get("/auth/google",
 
 // Rendering page after Signing with Google 
 app.get("/auth/google/compose", passport.authenticate('google', {
-  successRedirect: "/compose",
+  successRedirect: "/home",
   failureRedirect: "/login"
 }));
 
@@ -272,7 +281,7 @@ passport.authenticate("facebook")
 
 // Rendering page after Signing with Facebook 
 app.get("/auth/facebook/compose", passport.authenticate('facebook', {
-  successRedirect: "/compose",
+  successRedirect: "/home",
   failureRedirect: "/login"
 }));
 
@@ -283,7 +292,7 @@ app.post("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    res.redirect("/home");
   });
 });
 
