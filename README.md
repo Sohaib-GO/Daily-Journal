@@ -6,6 +6,7 @@ A simple blog built using
 - NodeJS
 - EJS
 - ExpressJS
+- PassportJS
 - MongoDB
 - Mongoose
 - Bootsrap
@@ -16,4 +17,4 @@ It's a simple blogging web application where one can add new blog posts, view th
 
 
 
-![](daily-g.gif)
+![](daily-g-3.gif)
