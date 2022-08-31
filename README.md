@@ -16,4 +16,4 @@ It's a simple blogging web application where one can add new blog posts, view th
 
 
 
-![](daily-g.gif)
+![](daily-g-2.gif)
