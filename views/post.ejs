@@ -38,13 +38,13 @@
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Title</label>
               <!-- New Title Name  -->
-              <input  class="form-control" type="text" name="newTitle">
+              <input  class="form-control" value="<%= title %>" type="text" name="newTitle">
             </div>
             <div class="mb-3">
                 <!-- New Content  -->
-                <label for="recipient-name" class="col-form-label">Content</label>
+                <label for="recipient-name"  class="col-form-label">Content</label>
 
-                <textarea class="form-control" name="newContent" id="" cols="80" rows="5"></textarea>
+                <textarea  class="form-control" name="newContent" id="" cols="80" rows="5"><%= content %></textarea>
             </div>
         </div>
         <div class="modal-footer">

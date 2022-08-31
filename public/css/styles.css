@@ -61,7 +61,9 @@ html{
 
   }
 .submitButton{
-    margin-top: 1rem !important;
+    margin-top: 1rem  !important;
+    margin-bottom: 9rem  !important;
+
 }
 h1{
   font-family: 'Lobster', cursive;
