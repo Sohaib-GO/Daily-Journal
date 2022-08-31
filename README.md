@@ -6,6 +6,7 @@ A simple blog built using
 - NodeJS
 - EJS
 - ExpressJS
+- PassportJS
 - MongoDB
 - Mongoose
 - Bootsrap
