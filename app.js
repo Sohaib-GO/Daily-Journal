@@ -16,7 +16,8 @@ const FacebookStrategy = require('passport-facebook');
 
 // plugin for Mongoose which adds a findOrCreate method to models
 const findOrCreate = require('mongoose-findorcreate')
-
+// require date file 
+const date = require(__dirname + "/data/date.js");
 
 
 app.set("view engine", "ejs");
@@ -52,6 +53,7 @@ mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
 const postSchema = {
   title: String,
   content: String,
+  date: String
 };
 
 // Users Schema: for login and authentication
@@ -129,6 +131,7 @@ app.get("/posts/:postId", (req, res) => {
       title: post.title,
       content: post.content,
       post,
+
     });
   });
 });
@@ -137,8 +140,8 @@ app.get("/posts/:postId", (req, res) => {
 // New blog route
 app.route("/compose")
   .get((req, res) => {
-    // Check if user is authenticated to publish new posts
 
+    // Check if user is authenticated to publish new posts
     if (req.isAuthenticated()) {
       res.render("compose");
     } else {
@@ -146,9 +149,11 @@ app.route("/compose")
     }
   })
   .post((req, res) => {
+    const time =date.getTime()
     const post = new Post({
       title: req.body.newPost,
       content: req.body.textArea,
+      date: time
     });
 
     post.save((err) => {
