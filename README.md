@@ -18,3 +18,4 @@ It's a simple blogging web application where one can add new blog posts, view th
 
 
 ![](daily-g-3.gif)
+![](time-stamp.png)
