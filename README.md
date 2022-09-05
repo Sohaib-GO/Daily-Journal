@@ -2,7 +2,7 @@
 A simple blog built using 
 - HTML 
 - CSS
-- Bootsrap
+- Bootstrap
 - JS
 - NodeJS
 - EJS
