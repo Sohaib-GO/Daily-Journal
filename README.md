@@ -1,5 +1,5 @@
-# Daily-Journal
-A simple blog built using 
+# Daily-Journal: Simple CRUD Web Application
+ A simple blog built using 
 - HTML 
 - CSS
 - Bootstrap
@@ -20,4 +20,6 @@ It's a simple blogging web application where one can add new blog posts, view th
 ![](daily-g-3.gif)
 
 Time stamp for each post ! 
+
+
 ![](time-stamp.png)
